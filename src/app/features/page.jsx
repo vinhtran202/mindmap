@@ -1,11 +1,14 @@
+"use client";
+import Spinner from "@/components/Spinner";
+import { LoadingContext } from "@/context/LoadingContext";
 import Head from "next/head";
-
-export const metadata = {
-  title: "Tính Năng - Mindmap",
-  description: "Đây là trang Tính năng của tôi.",
-};
+import { useContext, useEffect } from "react";
 
 export default function FeaturePage() {
+  const { loading } = useContext(LoadingContext);
+
+  if (loading) return <Spinner />;
+
   return (
     <>
       <Head>

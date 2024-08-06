@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "kvqn",
+      "name": "vinh tran",
+      "email": "vinhtran.fullstarkdev@gmail.com",
+      "mindmaps": [
+        {
+          "title": "mindmap no name 1",
+          "time": "2024-08-06T04:13:32.553Z",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "1ex0",
+      "name": "Vinh Trần",
+      "email": "vinhtran.gtvt@gmail.com",
+      "mindmaps": [
+        {
+          "title": "mindmap no name 1000",
+          "time": "2024-08-06T04:10:45.236Z",
+          "completed": false
+        },
+        {
+          "title": "mindmap no name 1",
+          "time": "2024-08-06T04:37:38.682Z",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "ohdx60zsj",
+      "name": "vinh tran",
+      "mindmaps": [
+        {
+          "title": "mindmap no name 1",
+          "time": "2024-08-06T04:39:52.992Z",
+          "completed": false
+        },
+        {
+          "title": "mindmap no name 1",
+          "time": "2024-08-06T04:58:12.523Z",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "0y30bvi5k",
+      "name": "vinh tran",
+      "mindmaps": []
+    },
+    {
+      "id": "hbyo19xph",
+      "name": "vinh tran",
+      "mindmaps": []
+    },
+    {
+      "id": "3jfp6c7se",
+      "name": "vinh tran",
+      "mindmaps": []
+    }
+  ]
+}

@@ -1,16 +1,18 @@
+"use client";
 import Head from "next/head";
 import Image from "next/image";
-
-export const metadata = {
-  title: "Bảng Giá - Mindmap",
-  description: "Đây là trang Bảng Giá của tôi.",
-};
+import { LoadingContext } from "@/context/LoadingContext";
+import { useContext, useEffect } from "react";
+import Spinner from "@/components/Spinner";
 
 export default function PriceListPage() {
+  const { loading } = useContext(LoadingContext);
+  if (loading) return <Spinner />;
+
   return (
     <>
       <Head>
-        <link rel="icon" href="/svg/gears-solid.svg" />
+        <link rel="preload" href="/svg/gears-solid.svg" as="image" />
       </Head>
       <div className="max-w-6xl mx-auto pt-10 pb-36 px-8">
         <div className="max-w-md mx-auto mb-14 text-center">
@@ -27,8 +29,8 @@ export default function PriceListPage() {
               <Image
                 src="https://res.cloudinary.com/williamsondesign/abstract-1.jpg"
                 alt=""
-                width={80} // Width của hình ảnh
-                height={80} // Height của hình ảnh
+                width={80}
+                height={80}
                 className="rounded-3xl"
               />
               <div className="ml-5">
@@ -47,8 +49,8 @@ export default function PriceListPage() {
                 <Image
                   src="https://res.cloudinary.com/williamsondesign/check-grey.svg"
                   alt="Demo"
-                  width={24} // Width của hình ảnh
-                  height={24} // Height của hình ảnh
+                  width={24}
+                  height={24}
                 />
                 <span className="ml-3">
                   Get started with <span className="text-black">messaging</span>

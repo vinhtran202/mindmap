@@ -1,11 +1,31 @@
-import React from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { usePathname } from "next/navigation";
+import React, { useEffect } from "react";
+import { createUserIfNotExists } from "@/app/api/user"; // Đảm bảo đường dẫn đúng
 
 export default function Menu() {
+  const { user, isLoading } = useUser();
+  const pathname = usePathname();
+
+  const getClassName = (path) => {
+    return pathname === path
+      ? "p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-600"
+      : "p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300";
+  };
+
+  useEffect(() => {
+    if (user) {
+      createUserIfNotExists(user);
+    }
+  }, [user]);
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <nav className="bg-white py-2 md:py-4">
       <div className="container px-4 mx-auto md:flex md:items-center">
         <div className="flex justify-between items-center">
-          <a className="font-bold text-xl text-indigo-600" href="/">
+          <a href="/" className="font-bold text-xl text-indigo-600">
             Mindmap Flow
           </a>
           <button
@@ -33,48 +53,52 @@ export default function Menu() {
           className="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0"
           id="navbar-collapse"
         >
-          <a
-            className="p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-600"
-            href="/"
-          >
-            Trang chủ
+          <a href="/" className={getClassName("/")}>
+            Home
           </a>
-          <a
-            className="p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300"
-            href="/abouts"
-          >
-            Giới thiệu
+          <a href="/abouts" className={getClassName("/abouts")}>
+            About
           </a>
-          <a
-            className="p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300"
-            href="/features"
-          >
-            Tính năng
+          <a href="/features" className={getClassName("/features")}>
+            Features
           </a>
-          <a
-            className="p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300"
-            href="/price"
-          >
-            Bảng giá
+          <a href="/price" className={getClassName("/price")}>
+            Price
           </a>
-          <a
-            className="p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300"
-            href="/contact"
-          >
-            Liên hệ
+          <a href="/contact" className={getClassName("/contact")}>
+            Contacts
           </a>
-          <a
-            href="/api/auth/login"
-            className="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-transparent rounded hover:bg-indigo-100 hover:text-indigo-700 transition-colors duration-300"
-          >
-            Đăng nhập
-          </a>
-          <a
-            href="/api/auth/login"
-            className="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-solid border-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1"
-          >
-            Đăng ký
-          </a>
+          {user ? (
+            <>
+              <div className="p-2 lg:px-4 md:mx-2 text-gray-600 rounded">
+                Hi, {user.name} !
+              </div>
+              <a href="/mindmap" className={getClassName("/mindmap")}>
+                My Mindmap
+              </a>
+              <a
+                href="/api/auth/logout"
+                className="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-solid border-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1"
+              >
+                Logout
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="/api/auth/login"
+                className="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-transparent rounded hover:bg-indigo-100 hover:text-indigo-700 transition-colors duration-300"
+              >
+                Login
+              </a>
+              <a
+                href="/api/auth/signup"
+                className="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-solid border-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1"
+              >
+                SignUp
+              </a>
+            </>
+          )}
         </div>
       </div>
     </nav>

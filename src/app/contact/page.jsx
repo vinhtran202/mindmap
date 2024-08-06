@@ -1,24 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import metadata from "../metadata";
 import Head from "next/head";
+import { LoadingContext } from "@/context/LoadingContext";
 
 export default function ContactPage() {
-  const [loading, setLoading] = useState(true);
+  const { loading } = useContext(LoadingContext);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Spinner />;
-  }
+  if (loading) return <Spinner />;
 
   return (
     <>

@@ -1,11 +1,19 @@
+// middleware.js
+
 import { NextResponse } from "next/server";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request) {
-  return NextResponse.redirect(new URL("/home", request.url));
+export async function middleware(req) {
+  const { pathname } = req.nextUrl;
+  const token = req.cookies.get("appSession"); // Thay đổi 'appSession' thành tên cookie bạn sử dụng để lưu token
+
+  // Kiểm tra xem người dùng có token hay không và chỉ bảo vệ route /mindmap
+  if (!token && pathname.startsWith("/mindmap")) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/about/:path*",
+  matcher: ["/mindmap/:path*"],
 };
